@@ -24,6 +24,6 @@ export class MenuScreenModel {
 	 * Get the leaderboard stats
 	 */
 	getStats(): LeaderboardStats | null {
-		return this.stats;
+		return stats;
 	}
 }

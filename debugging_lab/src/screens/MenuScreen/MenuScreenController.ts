@@ -32,7 +32,7 @@ export class MenuScreenController extends ScreenController {
 	private async refreshStats(): Promise<void> {
 		let stats: LeaderboardStats | null = null;
 		try {
-			stats = await this.loadStatsFromServer();
+			stats = await this.getStats();
 		} catch (error) {
 			console.error(error);
 		}
