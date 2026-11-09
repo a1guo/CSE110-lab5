@@ -32,7 +32,7 @@ export class MenuScreenController extends ScreenController {
 	private async refreshStats(): Promise<void> {
 		let stats: LeaderboardStats | null = null;
 		try {
-			stats = await this.getStats();
+			stats = await this.loadStatsFromServer();
 		} catch (error) {
 			console.error(error);
 		}
@@ -44,7 +44,7 @@ export class MenuScreenController extends ScreenController {
 	 * Load leaderboard stats from the Express server
 	 */
 	private async loadStatsFromServer(): Promise<LeaderboardStats> {
-		const response = await fetch("/api/stat");
+		const response = await fetch("/api/stats");
 		if (!response.ok) {
 			throw new Error("Unable to load stats");
 		}

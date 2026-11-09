@@ -91,3 +91,47 @@ the lemon's  positions to the very corners of the ubffer area.' -->
 ### Confirming the fix
 
 <!-- I replayed the game and paid attention to how the lemon updated the position, which seems to be random now as intended -->
+
+
+**LDATA FETCH ISSUE RESOLVED:**
+**Tickets solved:1** 
+
+---
+
+## Ticket <1>: <Stats always say "Stats unavailable">
+
+### Actual cause
+
+<!-- const response = await fetch("/api/stats"); had /stat instead of /stats, causing an erronous fetch' -->
+
+**File / function: MainMenuScreenController.ts**
+
+**What was wrong: called fetch to wrong destination as a typo**
+
+### Fix
+
+<!-- Changed stat to stats.' -->
+
+### I tinkered with the parts of the code responsible to fetching data and found that the catch error matched that of the fetch if something went wrong. I then checked index.ts to see what the server was expecting, which was app.get("/api/stats", (_req, res) => {. It is denoted as stats instead of stat for the correct call.'
+
+#### Hypothesis testing
+
+**I noticed that server was expecting stats instead of stats. To make sure that this inconsistency wasn't responsible for the issue, I made them the same'**
+
+#### Backward tracing
+
+<!-- Start from the symptom you saw and work backwards, one step at a time,
+     until you reach the buggy line. For each step, note where you looked
+     and what you saw there. Add steps as needed. -->
+
+1. **Symptom:** <!-- catch error of unable to load stats -->
+2. **Traced back to:** <!-- app.get("/api/stats", (_req, res) => {   -->
+3. **Traced back to:** [text](../src/screens/MenuScreen/MenuScreenController.ts)
+4. **Buggy code:** <!-- MenuScreenController.ts -->
+
+<!-- It is okay to use your judgement here in limiting the number of traceback steps. We want to understand your 
+    reasoning for how you discovered where the bug was -->
+
+### Confirming the fix
+
+<!-- I replayed the game and paid attention to how the text under the play button to see if it there is no catch error. There was not. -->
