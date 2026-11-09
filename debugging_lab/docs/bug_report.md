@@ -49,7 +49,7 @@ Copy the template below once for each ticket you solved.
 
 
 **LEMON RANDOMNESS FIX:**
-**Tickets solved:3** 
+**Tickets solved:1** 
 
 ---
 
@@ -93,7 +93,7 @@ the lemon's  positions to the very corners of the ubffer area.' -->
 <!-- I replayed the game and paid attention to how the lemon updated the position, which seems to be random now as intended -->
 
 
-**LDATA FETCH ISSUE RESOLVED:**
+**DATA FETCH ISSUE RESOLVED:**
 **Tickets solved:1** 
 
 ---
@@ -135,3 +135,49 @@ the lemon's  positions to the very corners of the ubffer area.' -->
 ### Confirming the fix
 
 <!-- I replayed the game and paid attention to how the text under the play button to see if it there is no catch error. There was not. -->
+
+
+
+
+**DATA FETCH ISSUE RESOLVED:**
+**Tickets solved 1** 
+
+---
+
+## Ticket <1>: <Stats showed best as 0">
+
+### Actual cause
+
+<!-- const response = await fetch("/api/stats"); had /stat instead of /stats, causing an erronous fetch' -->
+
+**File / function: Index.ts**
+
+**What was wrong: wrong check for best score**
+
+### Fix
+
+<!-- Changed stat to stats.' -->
+
+### Now with knowing index.ts handles the logic behind what gets stored, I went down the if checks for what gets stored.'
+
+#### Hypothesis testing
+
+**I noticed that only when the current score was lower than the high score would it be stored as a high score. This kept the best score at 0. This instead was saving the lowest score'**
+
+#### Backward tracing
+
+<!-- Start from the symptom you saw and work backwards, one step at a time,
+     until you reach the buggy line. For each step, note where you looked
+     and what you saw there. Add steps as needed. -->
+
+1. **Symptom:** <!-- the best score remained 0 -->
+2. **Traced back to:** f (entries[i].score <> best) {
+3. **Traced back to:** [
+4. **Buggy code:** <!-- index.ts -->
+
+<!-- It is okay to use your judgement here in limiting the number of traceback steps. We want to understand your 
+    reasoning for how you discovered where the bug was -->
+
+### Confirming the fix
+
+<!-- I replayed the game with a fresh server and refreshed the game and saw that the highest score was no longer 0 and was saved as intended. -->
