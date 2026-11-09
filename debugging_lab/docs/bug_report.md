@@ -144,7 +144,7 @@ the lemon's  positions to the very corners of the ubffer area.' -->
 
 ---
 
-## Ticket <1>: <Stats showed best as 0">
+## Ticket <2>: <Stats showed best as 0">
 
 ### Actual cause
 
@@ -181,3 +181,68 @@ the lemon's  positions to the very corners of the ubffer area.' -->
 ### Confirming the fix
 
 <!-- I replayed the game with a fresh server and refreshed the game and saw that the highest score was no longer 0 and was saved as intended. -->
+
+
+
+ Lemon Clicker Bug Report
+
+**Name:**
+**Tickets solved:** <!-- e.g. 1, 2, 3, 5, 6 (at least five) -->
+
+Copy the template below once for each ticket you solved. 
+
+
+
+
+
+
+---
+
+## Ticket <4>: <Stuck on the Game Over screen>
+
+### Actual cause : game timer kept going even when reached end game screen
+
+<!-- Which file and function was the bug in, and what was wrong with the code?
+     Explain why that code produced the behavior described in the ticket. -->
+
+**File / function: private endGame(): void {**
+
+**What was wrong: the function that ended the timer was called incorrectly as typo**
+
+### Fix
+
+<!-- changed this.stopTimer to this.stopTimer() -->
+
+### How did you find it? I looked through the factors that were required for the game to recognize that the game had ended. The first place to search was endGame(). Everything else had () in the calls.
+
+#### Hypothesis testing
+
+**What hypothesis ultimately led you to identify the buggy code, and why? : My hypothesis was that the endGame() function had something wrong as that was the function that was called to end the game. All the other this.functionName() calls had the parenthesis. My hypothesis was that the stopTimer() required the () to function properly**
+
+#### Backward tracing
+
+<!-- Start from the symptom you saw and work backwards, one step at a time,
+     until you reach the buggy line. For each step, note where you looked
+     and what you saw there. Add steps as needed. -->
+
+1. **Symptom:** <!-- repeated refreshing of the game over screen and a nearly nonfunctional  -->
+2. **Traced back to:** <!-- GameScreenController.ts -->
+3. **Traced back to:** line 87
+4. **Buggy code:** <!-- private endGame(): void {
+		this.stopTimer();
+
+		// Switch to results screen with final score
+		this.screenSwitcher.switchToScreen({
+			type: "result",
+			score: this.model.getScore(),
+		});
+	} -->
+
+<!-- It is okay to use your judgement here in limiting the number of traceback steps. We want to understand your 
+    reasoning for how you discovered where the bug was -->
+
+### Confirming the fix
+
+<!-- Replayed the game and took my sweet time clicking the restart button, which confirmed the button was reponsive. I was brought back to the next game as intended. -->
+
+
