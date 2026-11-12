@@ -246,3 +246,55 @@ Copy the template below once for each ticket you solved.
 <!-- Replayed the game and took my sweet time clicking the restart button, which confirmed the button was reponsive. I was brought back to the next game as intended. -->
 
 
+
+
+
+
+# Lemon Clicker Bug Report
+
+**Name: TICKET 5 fix: Leaderboard dates show "undefined"**
+**Tickets solved: 1** <!-- e.g. 1, 2, 3, 5, 6 (at least five) -->
+
+Copy the template below once for each ticket you solved. 
+
+---
+
+## Ticket <number>: <Leaderboard dates show "undefined"e>
+
+### Actual cause
+
+<!-- Which file and function was the bug in, and what was wrong with the code?
+     Explain why that code produced the behavior described in the ticket. -->
+
+**File / function: index.ts, ResultsScreenController.ts, RestultsScreenModel.ts, ResultsScreenView.ts**
+
+**What was wrong: stored and searched for save data using 2 different tags, one was time and the other was timestamp**
+
+### Fix
+
+<!-- I simply ctrl+f and replaced everything with time. This keeps things standardized -->
+
+### How did you find it? I looked at the saved data, which was fine, but noticed that the time data was stored as "time", but was called elsewhere and defined with "timestamp"
+
+#### Hypothesis testing
+
+**What hypothesis ultimately led you to identify the buggy code, and why?
+My hypothesis initially was the data was simply not being correctly pulled. I checked this by pulling up the actual data saved about found that the data was fine. The tags were fine. My next hypothesis was that there was probably a typo error somewhere and found timestamp, which didn't match any of the saved data's tags.**
+
+#### Backward tracing
+
+<!-- Start from the symptom you saw and work backwards, one step at a time,
+     until you reach the buggy line. For each step, note where you looked
+     and what you saw there. Add steps as needed. -->
+
+1. **Symptom:** <!-- saw UNDEFINED in the leaderboard stats for all of the data entries -->
+2. **Traced back to:** <!-- all the files that had access to the data store -->
+3. **Traced back to: anywhere that was able to access or call the datastore's data of time**
+4. **Buggy code:** <!-- ^ -->
+
+<!-- It is okay to use your judgement here in limiting the number of traceback steps. We want to understand your 
+    reasoning for how you discovered where the bug was -->
+
+### Confirming the fix
+
+<!-- I restarted the server and played a round. I saw that the data was now being shown correctly without UNDEFINED, which is intended behavior. -->
